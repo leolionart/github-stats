@@ -136,3 +136,4 @@ dmypy.json
 .idea
 stats/
 **/bk/
+set_env.bat

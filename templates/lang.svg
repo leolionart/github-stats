@@ -1,6 +1,8 @@
-<svg id="gh-dark-mode-only" width="360" height="210" xmlns="http://www.w3.org/2000/svg">
+{% filter spaceless %}
+<svg id="gh-dark-mode-only" class="languages" width="360" height="210" xmlns="http://www.w3.org/2000/svg">
 	<style>{{ base_css }}</style>
 	<g>
+		{{ gradient }}
 		<rect x="5" y="5" id="background" />
 		<g>
 			<foreignObject x="21" y="17" width="318" height="176">
@@ -11,7 +13,6 @@
 				{% endfor %}
 				</span>
 				</div>
-				
 				<ul>
 				{% for i, (lang, data) in enumerate(sorted_languages) %}
 					<li style="animation-delay: {{ i * 150 }}ms;">
@@ -23,9 +24,9 @@
 					</li>
 				{% endfor %}
 				</ul>
-				
 				</div>
 			</foreignObject>
 		</g>
 	</g>
 </svg>
+{% endfilter %}

@@ -1,26 +1,53 @@
 #!/usr/bin/python3
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from .env file
-load_dotenv()
-import asyncio
 import os
 import re
-
+import asyncio
 import aiohttp
+from jinja2 import Environment, FileSystemLoader
 
 from github_stats import Stats
+from themes import THEMES
 
-from jinja2 import Environment, FileSystemLoader
+def spaceless(value):
+    return re.sub(r'>\s+<', '><', value)
 
 # Setup Jinja2 environment
 env = Environment(loader=FileSystemLoader("templates"))
 env.globals['enumerate'] = enumerate
-output_dir = os.getenv("BUILD_DIR", "stats")
+env.filters['spaceless'] = spaceless
+output_dir = os.getenv("BUILD_DIR", "site/static")
 
 ################################################################################
 # Helper Functions
+
+"""
+"title_color": "ffffff",
+"text_color": "ffffff",
+"icon_color": "ffffff",
+"bg_color": "35,4158d0,c850c0,ffcc70",
+"""
+ROOT_CSS = """
+svg {
+	--svg-bg: #fff;
+	--svg-color: #24292E;
+	--blue: rgb(3, 102, 214);
+	--octicon-color: #586069;
+}
+
+svg#gh-dark-mode-only:target {
+	--svg-bg: #0d1117;
+	--svg-color: #c9d1d9;
+	--blue: #58a6ff;
+	--octicon-color: #8b949e;
+}
+"""
+GRADIENT = """
+<defs xmlns="http://www.w3.org/2000/svg">
+    <linearGradient id="gradient" gradientTransform="rotate(35)" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#{}"/>,<stop offset="50%" stop-color="#{}"/>,<stop offset="100%" stop-color="#{}"/>
+    </linearGradient>
+</defs>
+"""
 
 def generate_output(template_name: str, context: dict) -> None:
     """
@@ -28,7 +55,11 @@ def generate_output(template_name: str, context: dict) -> None:
     """
     if not os.path.isdir(output_dir): 
         os.mkdir(output_dir)
-
+    theme = os.getenv('THEME', 'default')
+    # Get light-theme
+    light = THEMES.get(theme) or THEMES.get(f"{theme}-light")
+    dark = THEMES.get(f"{theme}-dark") or THEMES.get("default-dark")
+    
     base_css_file = os.getenv('BASE_CSS', 'statics/stats.min.css')
     with open(base_css_file, 'r') as css_file:
         base_css = css_file.read()
@@ -119,8 +150,7 @@ async def main() -> None:
             exclude_langs=excluded_langs,
             ignore_forked_repos=ignore_forked_repos,
         ):
-            print(await s.languages)
-            # await asyncio.gather(generate_languages(s), generate_overview(s))
+            await asyncio.gather(generate_languages(s), generate_overview(s))
         else:
             raise Exception("Failed to generate stats.")
 

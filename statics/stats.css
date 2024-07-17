@@ -1,13 +1,24 @@
 svg {
+	--svg-bg: #fff;
+	--svg-color: #24292E;
+	--blue: rgb(3, 102, 214);
+	--octicon-color: #586069;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
 	font-size: 14px;
 	line-height: 21px;
 }
 
+svg#gh-dark-mode-only:target {
+	--svg-bg: #0d1117;
+	--svg-color: #c9d1d9;
+	--blue: #58a6ff;
+	--octicon-color: #8b949e;
+}
+
 #background {
 	width: calc(100% - 10px);
 	height: calc(100% - 10px);
-	fill: white;
+	fill: var(--svg-bg);
 	stroke: rgb(225, 228, 232);
 	stroke-width: 1px;
 	rx: 6px;
@@ -15,13 +26,16 @@ svg {
 }
 
 #gh-dark-mode-only:target #background {
-	fill: #0d1117;
 	stroke-width: 0.5px;
 }
 
 foreignObject {
 	width: calc(100% - 10px - 32px);
 	height: calc(100% - 10px - 32px);
+}
+
+.languages foreignObject {
+	height: calc(100% - 10px - 24px);
 }
 
 table {
@@ -36,11 +50,7 @@ th {
 	text-align: left;
 	font-size: 14px;
 	font-weight: 600;
-	color: rgb(3, 102, 214);
-}
-
-#gh-dark-mode-only:target th {
-	color: #58a6ff;
+	color: var(--blue);
 }
 
 td {
@@ -62,13 +72,13 @@ tr {
 }
 
 .octicon {
-	fill: rgb(88, 96, 105);
+	fill: var(--octicon-color);
 	margin-right: 1ch;
 	vertical-align: top;
 }
 
-#gh-dark-mode-only:target .octicon {
-	fill: #8b949e;
+.languages .octicon {
+	margin-right: 0.5ch;
 }
 
 @keyframes slideIn {
@@ -103,19 +113,11 @@ tr {
 .lang {
 	font-weight: 600;
 	margin-right: 4px;
-	color: rgb(36, 41, 46);
-}
-
-#gh-dark-mode-only:target .lang {
-	color: #c9d1d9;
+	color: var(--svg-color);
 }
 
 .percent {
-	color: rgb(88, 96, 105);
-}
-
-#gh-dark-mode-only:target .percent {
-	color: #8b949e;
+	color: var(--octicon-color);
 }
 
 div.ellipsis {
@@ -130,13 +132,8 @@ h2 {
 	line-height: 24px;
 	font-size: 16px;
 	font-weight: 600;
-	color: rgb(36, 41, 46);
-	fill: rgb(36, 41, 46);
-}
-
-#gh-dark-mode-only:target h2 {
-	color: #c9d1d9;
-	fill: #c9d1d9;
+	color: var(--svg-color);
+	fill: var(--svg-color);
 }
 
 ul {
