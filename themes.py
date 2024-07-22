@@ -1,4 +1,4 @@
-THEME =  {
+THEMES =  {
   "default": {
     "title_color": "2f80ed",
     "icon_color": "4c71f2",
