@@ -15,7 +15,7 @@ def spaceless(value):
 env = Environment(loader=FileSystemLoader("templates"))
 env.globals['enumerate'] = enumerate
 env.filters['spaceless'] = spaceless
-output_dir = os.getenv("BUILD_DIR", "site/static")
+output_dir = os.getenv("BUILD_DIR", "output")
 
 ################################################################################
 # Helper Functions
