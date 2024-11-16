@@ -17,7 +17,7 @@ jobs:
     steps:
     # Check out repository under $GITHUB_WORKSPACE, so the job can access it
     - uses: actions/checkout@v3
-    # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
+    # Generate a snake game contribution graph and output SVGs
     - name: Generate github-contribution-grid-snake.svg
       uses: Platane/snk/svg-only@v3
       with:
@@ -26,7 +26,7 @@ jobs:
           snake/github-contribution-grid-snake.svg
           snake/github-contribution-grid-snake-dark.svg?palette=github-dark
       env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
     # Run using Python 3.8 for consistency and aiohttp
     - name: Set up Python 3.8
@@ -53,16 +53,17 @@ jobs:
         EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
         EXCLUDE_FORKED_REPOS: true
 
-    # merge generated files
-    - name: Move all output to 1 folder for public
+    # Move generated files to output folder
+    - name: Move all output to one folder
       run: mv snake output
-    
+
     # Commit all changed files to the repository
     - name: Commit to the repo
       run: |
         git config --global user.name "leolionart"
         git config --global user.email "art.leolion@gmail.com"
-        git add .
-        # Force the build to succeed, even if no files were changed
-        git commit -m 'Update generated files' || true
-        git push
+        git add -A
+        # Commit with an appropriate message
+        git commit -m 'Update generated files' || echo "No changes to commit"
+        # Push changes forcefully to overwrite any existing files
+        git push --force
