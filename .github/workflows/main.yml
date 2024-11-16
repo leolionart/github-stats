@@ -55,7 +55,10 @@ jobs:
 
     # Move generated files to output folder
     - name: Move all output to one folder
-      run: mv snake output
+      run: |
+        mkdir -p output # Ensure the output directory exists
+        rsync -av --remove-source-files snake/ output/snake/
+        rm -rf snake # Clean up the original folder
 
     # Commit all changed files to the repository
     - name: Commit to the repo
