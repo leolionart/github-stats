@@ -1,10 +1,10 @@
 # [GitHub Stats Visualization](https://github.com/jstrieb/github-stats)
 
-<a href="https://github.com/jstrieb/github-stats">
-<img src="https://github.com/jstrieb/github-stats/blob/master/generated/overview.svg#gh-dark-mode-only" alt=""/>
-<img src="https://github.com/jstrieb/github-stats/blob/master/generated/languages.svg#gh-dark-mode-only" alt=""/>
-<img src="https://github.com/jstrieb/github-stats/blob/master/generated/overview.svg#gh-light-mode-only" alt=""/>
-<img src="https://github.com/jstrieb/github-stats/blob/master/generated/languages.svg#gh-light-mode-only" alt=""/>
+<a href="https://github.com/leolionart/github-stats">
+<img src="https://github.com/leolionart/github-stats/blob/main/output/overview.svg#gh-dark-mode-only" alt=""/>
+<img src="https://github.com/leolionart/github-stats/blob/main/output/lang.svg#gh-dark-mode-only" alt=""/>
+<img src="https://github.com/leolionart/github-stats/blob/main/output/overview.svg#gh-light-mode-only" alt=""/>
+<img src="https://github.com/leolionart/github-stats/blob/main/output/lang.svg#gh-light-mode-only" alt=""/>
 </a>
 
 Generate visualizations of GitHub user and repository statistics with GitHub
@@ -91,7 +91,7 @@ For more information on inaccuracies, see issue
    - To show statistics only for "owned" repositories and not forks with
      contributions, add an environment variable (under the `env` header in the
      [main
-     workflow](https://github.com/jstrieb/github-stats/blob/master/.github/workflows/main.yml))
+     workflow](https://github.com/leolionart/github-stats/blob/main/.github/workflows/main.yml))
      called `EXCLUDE_FORKED_REPOS` with a value of `true`.
    - These other values are added as secrets by default to prevent leaking
      information about private repositories. If you're not worried about that,
@@ -104,19 +104,19 @@ For more information on inaccuracies, see issue
    - The images will be automatically regenerated every 24 hours, but they can
      be regenerated manually by running the workflow this way.
 7. Take a look at the images that have been created in the
-   [`generated`](generated) folder.
+   [`output`](output) folder.
 8. To add your statistics to your GitHub Profile README, copy and paste the
    following lines of code into your markdown content. Change the `username`
    value to your GitHub username.
 
    ```md
-   ![](https://raw.githubusercontent.com/username/github-stats/master/generated/overview.svg#gh-dark-mode-only)
-   ![](https://raw.githubusercontent.com/username/github-stats/master/generated/overview.svg#gh-light-mode-only)
+   ![](https://raw.githubusercontent.com/username/github-stats/main/output/overview.svg#gh-dark-mode-only)
+   ![](https://raw.githubusercontent.com/username/github-stats/main/output/overview.svg#gh-light-mode-only)
    ```
 
    ```md
-   ![](https://raw.githubusercontent.com/username/github-stats/master/generated/languages.svg#gh-dark-mode-only)
-   ![](https://raw.githubusercontent.com/username/github-stats/master/generated/languages.svg#gh-light-mode-only)
+   ![](https://raw.githubusercontent.com/username/github-stats/main/output/lang.svg#gh-dark-mode-only)
+   ![](https://raw.githubusercontent.com/username/github-stats/main/output/lang.svg#gh-light-mode-only)
    ```
 
 9. Link back to this repository so that others can generate their own
